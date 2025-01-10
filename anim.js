@@ -5,7 +5,7 @@ const square=document.getElementById('square');
 function animate(){
 const screenWidth=window.innerWidth;
 const screenHeight=window.innerHeight;
-let randomX=Math.floor(Math.random()*(screenWidth-square.offsetWidth));
+let randomX=Math.floor(Math.random()*(screenWidth-square.offsetWidth)-100);
 let randomY=Math.floor(Math.random()*(screenHeight-square.offsetHeight-100));
 let r=Math.random()*255;
 let g=Math.random()*255;

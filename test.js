@@ -53,18 +53,3 @@ function processSelectedDivs() {
 }
 
 
-
-
-
-
-
-
-// if (selectedBlocks.length === 0) {
-//     alert('Please select at least one div');
-//     return 0;
-// }
-
-
-
-
-
