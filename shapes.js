@@ -1,68 +1,81 @@
+const container = document.getElementById('container');
+        const minSize = 50;
+        let size = 200;
+        const sizeReduction = 10;
+
+        document.getElementById('circle').addEventListener('click', () => appendShapes('circle'));
+        document.getElementById('square').addEventListener('click', () => appendShapes('square'));
+        document.getElementById('triangle').addEventListener('click', () => appendShapes('triangle'));
 
 
-// document.getElementById('circle').addEventListener('click',()=>{
-//     appendShapes('circle');
-// });
-// document.getElementById('square').addEventListener('click',()=>{
-//     appendShapes('square');
-// });
-// document.getElementById('triangle').addEventListener('click',()=>{
-//     appendShapes('triangle');
-// });
+            // console.log(shape.getBoundingClientRect())
+        function appendShapes(className) {
+            const count = parseInt(document.getElementById('shapeCount').value);
+            if (isNaN(count))
+                { return;
+                }
 
-// let num=parseInt(document.getElementById('numInput').value);
+            let shapesAdded = 0;
+            while (shapesAdded < count) {
+                const shape = document.createElement('div');
+                shape.className = className;
 
-// console.log(parseInt(document.getElementById('shapeCount').value));
-console.log(container)
+                if (className === 'triangle') {
+                    shape.style.borderLeft = `${size / 2}px solid transparent`;
+                    shape.style.borderRight = `${size / 2}px solid transparent`;
+                    shape.style.borderBottom = `${size}px solid rgb(20, 50, 198)`;
+                }
+                 else {
+                    shape.style.width = `${size}px`;
+                    shape.style.height = `${size}px`;
+                }
 
-
-function appendShapes(class_name){
-    const container=document.getElementById('container');
-    // console.log(parseInt(document.getElementById('shapeCount').value));
-    const count = parseInt(document.getElementById('shapeCount').value);
-
-    for(let i=0;i<count;i++)
-    {
-        const div=document.createElement('div');
-        div.className=class_name;
-        container.appendChild(div);
-    }
-
-// let scroll = this.scrollY;
-// window.addEventListener("scroll", (event) => {
-//     console.log(scroll)
-// })
-
-// if(scroll>0){
-//     const cir=document.getElementById('circle');
-//     const squ=document.getElementById('square');
-//     cir.style.height=`${200-100}px`;
-//     cir.style.width=`${200-100}px`;
-//     squ.style.height=`${200-100}px`;
-//     squ.style.width=`${200-100}px`;
-// }
-let size=200;
-
-console.log(container.scrollHeight);
- if (container.scrollHeight > 628 ) {
-    console.log(container.scrollHeight);
-    console.log(container.offsetHeight);
-    console.log(container.scrollWidth);
-    console.log(container.offsetHeight);
-    
-        size = Math.max(50, size - 100);
-        let shapes = document.querySelectorAll(`.${class_name}`);
-        shapes=Array.from(shapes)
-        shapes.forEach(shape => {
-            if(shape.className=='triangle'){
-                shape.style.borderLeft=`${100-50}px solid transparent`;
-                shape.style.borderRight=`${100-50}px solid transparent`;
-                shape.style.borderBottom=`${size}px solid blue`;
-            }else{
-            shape.style.width = size + 'px';
-            shape.style.height = size + 'px';
+                if (hasEnoughSpace(shape)) {
+                    container.appendChild(shape);
+                    shapesAdded++;
+                } 
+                else {
+                    size -= sizeReduction;
+                     if (size < minSize) {
+                    size = minSize;
+                        break;
+                }
+                    resizeShapes();
+                }
             }
-        });
-    }
-}
-    
+
+            // if (shapesAdded < count) {
+            //     alert('No enough space for all shapes!');
+            // }
+
+            if (shapesAdded > 0) {
+                document.getElementById('shapeCount').value = '';
+            }
+        }
+        
+        
+        function hasEnoughSpace(shape) {
+           
+            container.appendChild(shape);
+            const rect = shape.getBoundingClientRect();
+            const containerRect = container.getBoundingClientRect();
+            const hasAvailSpace = rect.bottom <= containerRect.bottom && rect.right <= containerRect.right;
+            container.removeChild(shape);
+            return hasAvailSpace;
+        }
+
+        
+        function resizeShapes() {
+            
+            const shapes = document.querySelectorAll('.circle, .square, .triangle');
+            shapes.forEach(shape => {
+                if (shape.className === 'triangle') {
+                    shape.style.borderLeft = `${size / 2}px solid transparent`;
+                    shape.style.borderRight = `${size / 2}px solid transparent`;
+                    shape.style.borderBottom = `${size}px solid rgb(20, 50, 198)`;
+                } else {
+                    shape.style.width = `${size}px`;
+                    shape.style.height = `${size}px`;
+                }
+            });
+        }
