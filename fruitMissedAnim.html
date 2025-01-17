@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+#scorediv{
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#img-container{
+    width: 100%;
+    height: 90%;
+    background-color: #000;
+    position: relative;
+    border: 1px solid #000;
+    overflow: hidden;
+    margin-top: 50px;
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    align-content: center;    
+}
+.images {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    cursor: pointer;
+   
+}
+
+#restartBtn{
+    font-weight: bold;
+    font-size: x-large;
+    margin: 10px;;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(36, 181, 20);
+    cursor: pointer;
+}
+.animate{
+-webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -ms-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+    width: 300px;
+    height: 300px;
+}
+    </style>
+</head>
+<body>
+    <div id="scorediv">Score:<span id="score">0</span> Missed:<span id="misssed">0</span></div>
+    <div id="img-container"></div>
+    <div id="restartBtn" onclick="restart()">Restart</div>
+    <script src="/fruitmissedAnim.js"></script>
+</body>
+</html>
